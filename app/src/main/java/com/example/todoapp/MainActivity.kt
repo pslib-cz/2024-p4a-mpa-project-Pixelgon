@@ -1,47 +1,44 @@
 package com.example.todoapp
 
+import AppDatabase
+import MainViewModel
+import TodoRepository
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.todoapp.ui.theme.TodoAppTheme
+import androidx.room.Room
+import com.example.todoapp.ui.constants.OverlappingHeight
+import com.example.todoapp.composables.TodoInputBar
+import com.example.todoapp.composables.TodoItemsContainer
+import kotlinx.coroutines.Dispatchers
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        val db = Room
+            .databaseBuilder(applicationContext, AppDatabase::class.java, "todo-db")
+            .fallbackToDestructiveMigration()
+            .build()
+        val mainViewModel = MainViewModel(TodoRepository(db.todoDao()), ioDispatcher = Dispatchers.IO)
         setContent {
-            TodoAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                TodoItemsContainer(
+                    todoItemsFlow = mainViewModel.todos,
+                    onItemClick = mainViewModel::toggleTodo,
+                    onItemDelete = mainViewModel::removeTodo,
+                    overlappingElementsHeight = OverlappingHeight
+                )
+                TodoInputBar(
+                    modifier = Modifier.align(Alignment.BottomStart),
+                    onAddButtonClick = mainViewModel::addTodo
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TodoAppTheme {
-        Greeting("Android")
     }
 }
