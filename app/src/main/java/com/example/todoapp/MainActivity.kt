@@ -1,8 +1,5 @@
 package com.example.todoapp
 
-import AppDatabase
-import MainViewModel
-import TodoRepository
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +11,9 @@ import androidx.room.Room
 import com.example.todoapp.ui.constants.OverlappingHeight
 import com.example.todoapp.composables.TodoInputBar
 import com.example.todoapp.composables.TodoItemsContainer
+import com.example.todoapp.data.AppDatabase
+import com.example.todoapp.data.MainViewModel
+import com.example.todoapp.data.TodoRepository
 import kotlinx.coroutines.Dispatchers
 
 class MainActivity : ComponentActivity() {

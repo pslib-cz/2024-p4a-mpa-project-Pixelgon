@@ -1,6 +1,5 @@
 package com.example.todoapp.composables
 
-import TodoItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.todoapp.data.TodoItem
 import com.example.todoapp.ui.constants.MediumDp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf

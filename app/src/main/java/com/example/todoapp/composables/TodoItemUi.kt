@@ -1,6 +1,5 @@
 package com.example.todoapp.composables
 
-import TodoItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todoapp.R
 import com.example.todoapp.R.drawable.ic_delete
+import com.example.todoapp.data.TodoItem
 import com.example.todoapp.ui.constants.LargeDp
 import com.example.todoapp.ui.constants.MediumDp
 import com.example.todoapp.ui.constants.TodoItemActionButtonRippleRadius

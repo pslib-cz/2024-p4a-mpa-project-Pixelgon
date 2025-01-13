@@ -1,5 +1,8 @@
+package com.example.todoapp.data
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todoapp.data.TodoItem
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
